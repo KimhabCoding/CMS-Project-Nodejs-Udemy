@@ -5,7 +5,7 @@ process.stdout.write('Input your name: ');
 
 // Scan Input and Pass it out | Read
 process.stdin.on('data', function (answer) {
-    log(answer.toString()); 
+    log(answer.toString().trim()); 
     process.exit(); 
 });
 
