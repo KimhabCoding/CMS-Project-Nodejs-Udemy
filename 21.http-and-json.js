@@ -11,7 +11,9 @@ http.createServer((req, serverRes) => {
         https.get(url, (httpRes) => {
             httpRes.on('data', data => {
                 httpRes.setEncoding('UTF-8');
-                log(data);
+                // log(data);
+                // To get data on on web or write it 
+                serverRes.write(data); 
             });
 
             // end request | after finish req 
@@ -20,6 +22,10 @@ http.createServer((req, serverRes) => {
                 log('Time out');
             }); 
         }); 
+    }
+    else {
+        serverRes.writeHead(404, { 'Content-Type': 'text/plain' }); 
+        serverRes.end('404 Could not found it.');
     }
 
 }).listen(PORT); 
