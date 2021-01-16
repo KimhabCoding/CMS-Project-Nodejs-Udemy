@@ -1,0 +1,17 @@
+const WebSocketServer = require('ws').Server;
+// const WSS = new WebSocketServer.Server({ port: 3082 });
+const WSS = new WebSocketServer({ port: 3082 });
+
+// WSS.on('connection', function connection(ws) {
+WSS.on('connection', (ws)=>{
+//   ws.on('message', function incoming(message) {
+    // console.log('received: %s', message);
+    console.log('We are connected.');
+  });
+
+//   ws.send('something');
+// });
+
+/*  More about 
+    - Web Soceket Server: https://github.com/websockets/ws 
+ */
