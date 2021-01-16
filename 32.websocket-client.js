@@ -10,9 +10,15 @@ WebSocket.addEventListener('message', function (event) {
     console.log('Message from server ', event.data);
 }); */
 
+WSS.onmessage = (payload) => {
+    console.log(payload.data);
+}; 
+// More onmessage: https://javascript.info/websocket
+
+
 document.forms[0].onsubmit = () => {
     let input_message = document.getElementById('message');
-    console.log(input_message.value);
+    // console.log(input_message.value);
 
     // Send Data 
     WSS.send(input_message.value); 
