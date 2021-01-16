@@ -6,7 +6,14 @@ const WSS = new WebSocketServer({ port: 3082 });
 WSS.on('connection', (ws)=>{
 //   ws.on('message', function incoming(message) {
     // console.log('received: %s', message);
+  ws.on('message', (message) => {
     console.log('We are connected.');
+    
+    // message gets from ...document.getElementById('message'); in file: 32.websocket-cleint.js
+    console.log(message);
+  }); 
+
+
   });
 
 //   ws.send('something');
