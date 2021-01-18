@@ -8,10 +8,15 @@ WSS.on('connection', (ws)=>{
     // console.log('received: %s', message);
   ws.on('message', (message) => {
 
-    WSS.clients.forEach((client) => {
-      client.send(message);   
-    }); 
-
+    if (message === 'close') {
+      ws.close(); 
+    }
+    else {
+        WSS.clients.forEach((client) => {
+        client.send(message);   
+      }); 
+    }
+    
     console.log('We are connected.');
     
     // message gets from ...document.getElementById('message'); in file: 32.websocket-cleint.js

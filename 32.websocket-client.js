@@ -11,9 +11,32 @@ WebSocket.addEventListener('message', function (event) {
 }); */
 
 WSS.onmessage = (payload) => {
-    console.log(payload.data);
+    displayMessage(payload.data);
+    // console.log(payload.data);
 }; 
 // More onmessage: https://javascript.info/websocket
+
+WSS.onopen = () => {
+    // console.log('Connection OPEN');
+    displayTitle('Connect to Server'); 
+}; 
+
+WSS.onclose = () => {
+    // console.log('Connection Close');
+    displayTitle('Disconnect from Server'); 
+};
+
+function displayTitle(title) {
+    document.querySelector('h1').innerHTML = title; 
+}
+
+function displayMessage(message) {
+    let h1 = document.createElement('h1'); 
+    h1.innerText = message; 
+    document.querySelector('div.messages').appendChild(h1); 
+}
+
+
 
 
 document.forms[0].onsubmit = () => {
