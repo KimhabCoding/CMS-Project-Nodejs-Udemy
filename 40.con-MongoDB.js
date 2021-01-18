@@ -22,7 +22,8 @@ MongoClient.connect(url, function(err, client) {
   const db = client.db(dbName);
   const object = new ObjectId(); 
   
-  db.collection(dbCol).insertOne({
+  // Insert Data 
+  /* db.collection(dbCol).insertOne({
     name: 'Horse', 
     legs: 2
   }, (err, result) => {
@@ -32,6 +33,12 @@ MongoClient.connect(url, function(err, client) {
       log(`Data is inserted.`); 
       // log(ObjectId()); 
       log(object); 
+  });  */
+
+  // Fetching Data 
+  db.collection(dbCol).find().toArray(function (err, result) {
+    if (err) throw err; 
+    log(result); 
   }); 
  
   client.close();
