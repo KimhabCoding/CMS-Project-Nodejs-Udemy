@@ -35,12 +35,32 @@ MongoClient.connect(url, function(err, client) {
       log(object); 
   });  */
 
-  // Fetching Data 
-  db.collection(dbCol).find().toArray(function (err, result) {
+  // Fetching | READING Data 
+
+  /* db.collection(dbCol).find().toArray(function (err, result) {
     if (err) throw err; 
     log(result); 
-  }); 
- 
+  });  */
+
+  // Updating Data 
+  // More about update: https://docs.mongodb.com/manual/reference/method/db.collection.update/#update-parameter
+  db.collection(dbCol).findOneAndUpdate({
+    _id: new ObjectId('600531871fb78a2028dd78f4')
+  }, {
+    $set: 
+    {
+      name: 'Updated-2'
+    }
+
+  }).then(result => {
+
+    log(result); 
+
+  }).catch(err => {
+    
+    log(err); 
+  });
+  
   client.close();
 });
 
