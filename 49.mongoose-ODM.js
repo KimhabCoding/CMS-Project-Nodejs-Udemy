@@ -1,5 +1,7 @@
 const mongoose = require('mongoose'); 
-const User = require('./models/User'); 
+const User = require('./models/User');
+const express = require('express'); 
+const app = express(); 
 const log = console.log; 
  
 // Connection URL
@@ -14,7 +16,7 @@ mongoose.connection
         log(`Could not connect`, err); 
     });  
 
-const newUser = new User({
+/* const newUser = new User({
 
     firstName: 'Ho', 
     lastName: 'Kimhab', 
@@ -25,4 +27,12 @@ const newUser = new User({
 newUser.save(function(err, dataSaved) {
     if (err) return err; 
     log(dataSaved); 
+});  */
+
+// app.post('/users'); 
+
+const PORT = 3024 || process.env.PORT; 
+
+app.listen(PORT, () => {
+    log(`Running on port ${PORT}`); 
 }); 
