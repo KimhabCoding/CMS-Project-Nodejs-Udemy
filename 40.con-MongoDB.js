@@ -44,22 +44,47 @@ MongoClient.connect(url, function(err, client) {
 
   // Updating Data 
   // More about update: https://docs.mongodb.com/manual/reference/method/db.collection.update/#update-parameter
-  db.collection(dbCol).findOneAndUpdate({
-    _id: new ObjectId('600531871fb78a2028dd78f4')
-  }, {
-    $set: 
-    {
-      name: 'Updated-2'
-    }
+
+  // db.collection(dbCol).findOneAndUpdate({
+  //   _id: new ObjectId('600531871fb78a2028dd78f4')
+  // }, {
+  //   $set: 
+  //   {
+  //     name: 'Updated-2'
+  //   }
+
+  // }).then(result => {
+
+  //   log(result); 
+
+  // }).catch(err => {
+    
+  //   log(err); 
+  // });
+
+  // Delete data 
+
+ /*  db.collection(dbCol).deleteMany({
+
+  }); 
+
+  db.collection(dbCol).deleteOne({
+
+  });
+  
+  db.collection(dbCol).deleteAndFind({
+
+  });  */
+
+ /*  db.collection(dbCol).findOneAndDelete({
+
+    _id: new ObjectId('600534d379e7a133585c69b5')
 
   }).then(result => {
-
+    
     log(result); 
 
-  }).catch(err => {
-    
-    log(err); 
-  });
+  });  */
   
   client.close();
 });
