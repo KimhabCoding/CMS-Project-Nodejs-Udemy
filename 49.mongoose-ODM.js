@@ -6,6 +6,7 @@ const bodyParser = require('body-parser'); // https://www.npmjs.com/package/body
 const log = console.log; 
 
 mongoose.Promise = global.Promise; 
+// More about Using Promise: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
  
 // Connection URL
 const url = 'mongodb://localhost:27017/myproject';
@@ -72,7 +73,27 @@ app.post('/users', (req, res) => {
     }); 
 }); 
 
-// More about Using Promise: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+// Get User | Fetch Data User 
+// More Fetch or query data: https://mongoosejs.com/docs/api.html#model_Model.find
+app.get('/users', (req, res) => {
+    
+    User.find({}).then(users => {
+        res.send(users); 
+    }); 
+}); 
+
+// Edit or Patch data 
+// More: https://expressjs.com/en/api.html 
+app.patch('/users/:id', (req, res) => {
+    const id = req.params.id;
+    const firstName = req.body.firstName;
+
+    // findByIdAndUpdate: https://mongoosejs.com/docs/tutorials/findoneandupdate.html
+    User.findByIdAndUpdate({ _id: id }, { $set: { firstName: firstName } }, { new: true })
+        .then(savedUser => {
+            res.send('User was edited.'); 
+        }); 
+}); 
 
 const PORT = 3024 || process.env.PORT; 
 
