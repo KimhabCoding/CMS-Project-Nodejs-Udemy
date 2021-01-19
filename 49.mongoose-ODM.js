@@ -95,6 +95,18 @@ app.patch('/users/:id', (req, res) => {
         }); 
 }); 
 
+app.put('/users/:id', (req, res) => {
+    const id = req.params.id;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+
+    // findByIdAndUpdate: https://mongoosejs.com/docs/tutorials/findoneandupdate.html
+    User.findByIdAndUpdate({ _id: id }, { $set: { firstName: firstName , lastName: lastName} }, { new: true })
+        .then(savedUser => {
+            res.send('User was updated by put.'); 
+        }); 
+}); 
+
 const PORT = 3024 || process.env.PORT; 
 
 app.listen(PORT, () => {
