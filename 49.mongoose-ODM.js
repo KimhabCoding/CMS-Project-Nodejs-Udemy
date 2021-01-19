@@ -31,6 +31,20 @@ newUser.save(function(err, dataSaved) {
 
 // app.post('/users'); 
 
+// Get Method 
+app.get('/', (req, res) => {
+    res.send('Home page'); 
+}); 
+
+// Post Method 
+app.post('/users', (req, res) => {
+    const newUser = new User({
+        firstName: 'Ho', 
+        lastName: 'Kimhab', 
+        isActive: 1 
+    }); 
+}); 
+
 const PORT = 3024 || process.env.PORT; 
 
 app.listen(PORT, () => {
