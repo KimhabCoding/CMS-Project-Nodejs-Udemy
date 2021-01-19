@@ -95,6 +95,7 @@ app.patch('/users/:id', (req, res) => {
         }); 
 }); 
 
+// Update data with Put 
 app.put('/users/:id', (req, res) => {
     const id = req.params.id;
     const firstName = req.body.firstName;
@@ -106,6 +107,18 @@ app.put('/users/:id', (req, res) => {
             res.send('User was updated by put.'); 
         }); 
 }); 
+
+// Delete data 
+app.delete('/users/:id', (req, res) => {
+    // TypeError: User.remove is not a function fix by replace remove--->findByIdAndRemove
+    User.findByIdAndRemove({ _id: req.params.id }).then(User => {
+        User.remove().then(UserRemoved => {
+            res.send('User remove' + UserRemoved); 
+        }); 
+    }); 
+}); 
+
+
 
 const PORT = 3024 || process.env.PORT; 
 
