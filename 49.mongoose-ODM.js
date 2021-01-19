@@ -53,6 +53,10 @@ app.post('/users', (req, res) => {
         firstName: req.body.firstName, // 'Honibri', 
         lastName: req.body.lastName, // 'Kimhab', 
         isActive: req.body.isActive
+
+        // Choose Body---> 'x-www-form-urlencoded' 
+    }).catch(err => {
+        res.status(404).send('Data not save because...'); 
     }); 
 
     // Save Data 01 = 02 
