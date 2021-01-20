@@ -1,0 +1,17 @@
+{
+    "name": "cms-project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js"
+    },
+    "keywords": [
+        "cms",
+        "project",
+        "nodejs"
+    ],
+    "author": "",
+    "license": "ISC"
+}
