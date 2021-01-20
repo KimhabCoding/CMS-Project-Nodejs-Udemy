@@ -10,6 +10,9 @@ const log = console.log;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+mongoose.Promise = global.Promise; 
+// More about Using Promise: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+
 // Connection URL
 const url = 'mongodb://localhost:27017/login';
 // const db_name = 'login'; 
@@ -57,6 +60,23 @@ app.post('/register', (req, res) => {
         });
     });
 });
+
+// Login 
+app.post('/login', (req, res) => {
+    User_LoginModel.findOne({ email: req.body.email }).then(user => {
+        if (user) {
+            // user.password (then(user))
+            bcrypt.compare(req.body.password, user.password, (err, mathced) => {
+                if (err) return err; 
+                if (mathced) {
+                    res.send('User is able to login'); 
+                } else {
+                    res.send('Not able to login'); 
+                }
+            }); 
+        }
+    }); 
+}); 
 
 const PORT = 3024 || process.env.PORT;
 
