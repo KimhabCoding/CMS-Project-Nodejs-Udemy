@@ -22,8 +22,17 @@ app.get("/", (req, res) => {
 
 // About
 app.get("/about", (req, res) => {
-//   res.send("Hello Method Get");
   res.render('home/about');
+});
+
+// Register 
+app.get("/register", (req, res) => {
+  res.render('home/register');
+});
+
+// Login 
+app.get("/login", (req, res) => {
+  res.render('home/login');
 });
 
 const PORT = 3024 || process.env.PORT;
