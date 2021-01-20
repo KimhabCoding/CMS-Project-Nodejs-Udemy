@@ -20,6 +20,12 @@ app.get("/", (req, res) => {
   res.render('home/index');
 });
 
+// About
+app.get("/about", (req, res) => {
+//   res.send("Hello Method Get");
+  res.render('home/about');
+});
+
 const PORT = 3024 || process.env.PORT;
 
 app.listen(PORT, () => {
