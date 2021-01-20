@@ -14,26 +14,10 @@ app.set('view engine', 'handlebars');
 // GET /style.css etc
 app.use(express.static(path.join(__dirname, "public")));
 
-// Get
-app.get("/", (req, res) => {
-//   res.send("Hello Method Get");
-  res.render('home/index');
-});
 
-// About
-app.get("/about", (req, res) => {
-  res.render('home/about');
-});
-
-// Register 
-app.get("/register", (req, res) => {
-  res.render('home/register');
-});
-
-// Login 
-app.get("/login", (req, res) => {
-  res.render('home/login');
-});
+// https://expressjs.com/en/guide/routing.html
+const main = require('./routes/home/main'); 
+app.use('/', main); 
 
 const PORT = 3024 || process.env.PORT;
 
