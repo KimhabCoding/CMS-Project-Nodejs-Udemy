@@ -16,8 +16,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 // https://expressjs.com/en/guide/routing.html
-const main = require('./routes/home/main'); 
-app.use('/', main); 
+const home = require('./routes/home/home'); 
+const admin = require('./routes/admin/admin'); 
+app.use('/', home); 
+app.use('/admin', admin); 
 
 const PORT = 3024 || process.env.PORT;
 
