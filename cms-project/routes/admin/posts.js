@@ -13,6 +13,14 @@ router.all('/*', (req, res, next) => {
 
 router.get('/', (req, res) => {
   res.send('It works.'); 
+});
+
+/* router.get('/index', (req, res) => {
+  res.render('/admin/posts/index');  
+});  */
+
+router.get('/create', (req, res) => {
+  res.render('admin/posts/create'); 
 }); 
 
 module.exports = router; // router get from 02

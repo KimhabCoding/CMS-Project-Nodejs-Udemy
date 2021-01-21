@@ -40,6 +40,7 @@ app.use(express.static(path.join(__dirname, "public")));
 const home = require('./routes/home/home'); 
 const admin = require('./routes/admin/admin'); 
 const posts = require('./routes/admin/posts'); 
+
 app.use('/', home); 
 app.use('/admin', admin); 
 app.use('/admin/posts', posts); 
