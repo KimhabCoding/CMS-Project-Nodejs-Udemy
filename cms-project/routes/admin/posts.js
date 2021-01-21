@@ -19,8 +19,15 @@ router.get('/', (req, res) => {
   res.render('/admin/posts/index');  
 });  */
 
+// Create Post 
 router.get('/create', (req, res) => {
   res.render('admin/posts/create'); 
 }); 
+
+// Method post to create post 
+router.post('/create', (req, res) => {
+  res.render('admin/posts/create'); 
+});
+
 
 module.exports = router; // router get from 02
