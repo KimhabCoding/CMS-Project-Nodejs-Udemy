@@ -1,6 +1,15 @@
 const express = require("express");
 const router = express.Router(); // Code: 02
 
+
+router.all('/*', (req, res, next) => {
+  // app.locals: https://expressjs.com/en/api.html#app.locals
+  // laytouts is a folder && 'admin' is a file 
+  // app.locals.layout: https://github.com/express-handlebars/express-handlebars
+  req.app.locals.layout = 'home'; 
+  next(); 
+}); 
+
 // Get
 router.get("/", (req, res) => {
 //   res.send("Hello Method Get");

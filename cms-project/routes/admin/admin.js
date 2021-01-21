@@ -17,4 +17,10 @@ router.get("/", (req, res) => {
   res.render('admin/index');
 });
 
+// Dashboard 
+router.get("/dashboard", (req, res) => {
+//   res.send("Hello Method Get");
+  res.render('admin/dashboard');
+});
+
 module.exports = router; // router get from 02
