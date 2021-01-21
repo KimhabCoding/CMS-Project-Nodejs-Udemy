@@ -3,6 +3,27 @@ const app = express();
 const path = require("path");
 const exphbs  = require('express-handlebars');
 const log = console.log;
+const mongoose = require('mongoose'); 
+const bodyParser = require('body-parser'); // https://www.npmjs.com/package/body-parser
+
+mongoose.Promise = global.Promise; 
+// More about Using Promise: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
+
+// Connection URL
+const url = 'mongodb://localhost:27017/cms';
+
+// BodyParser 
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
+
+// mongoose.connect(url, { useNewUrlParser: true }); 
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}); 
+mongoose.connection
+    .once('open', () => log('Connected'))
+    .on('error', (err) => {
+        
+        log(`Could not connect`, err); 
+    });  
 
 // Express-handlebars https://github.com/express-handlebars/express-handlebars
 // defaultLayout: https://github.com/express-handlebars/express-handlebars#defaultlayout
