@@ -14,7 +14,7 @@ const url = 'mongodb://localhost:27017/cms';
 
 // BodyParser   
 app.use(bodyParser.json()); 
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: false })); 
 
 // mongoose.connect(url, { useNewUrlParser: true }); 
 mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}); 

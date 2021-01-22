@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router(); // Code: 02
-const PostModel = require('../../models/Post'); 
+const Post = require('../../models/Post'); 
 const log = console.log; 
 
 // https://expressjs.com/en/4x/api.html#app.all 
@@ -23,29 +23,35 @@ router.get('/', (req, res) => {
 
 // Create Post 
 router.get('/create', (req, res) => {
-  res.render('admin/posts/create'); 
+  res.render('admin/posts/create', {title: 'Create Post'}); 
 }); 
 
 // Method post to create post 
 router.post('/create', (req, res) => {
   let allowComments = true; 
-  var rb = req.boby; 
   
-  // req.body.allowComments ? true : false;  
-  if (rb.allowComments) {
-    allowComments = true; 
+  // log(req.body.allowComments); 
+
+  if(req.body.allowComments) {
+    allowComments = true;
   } else {
     allowComments = false; 
   }
 
-  PostModel({
+  const newPost = new Post({
     title: req.body.title,
     status: req.body.status,
-    allowComments: req.body.allowComments,
+    allowComments: allowComments,
     body: req.body.body
   }); 
+
+  newPost.save().then(savedPost => {
+    res.redirect('/admin/posts'); 
+  }).catch(error => {
+    log('Could not save data'); 
+  }); 
   // Output req.body 
-  log(req.body); 
+  // log(req.body); 
   // res.send('admin/posts/create'); 
 });
 

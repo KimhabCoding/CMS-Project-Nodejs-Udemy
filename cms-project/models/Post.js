@@ -20,7 +20,7 @@ const PostSchema = new Schema({
     }, 
     allowComments: {
         type: Boolean, 
-        required: require 
+        require: true 
     }, 
     body: {
         type: String, 
