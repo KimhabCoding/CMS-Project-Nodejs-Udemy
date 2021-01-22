@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router(); // Code: 02
+const PostModel = require('../../models/Post'); 
 const log = console.log; 
 
 // https://expressjs.com/en/4x/api.html#app.all 
@@ -27,6 +28,22 @@ router.get('/create', (req, res) => {
 
 // Method post to create post 
 router.post('/create', (req, res) => {
+  let allowComments = true; 
+  var rb = req.boby; 
+  
+  // req.body.allowComments ? true : false;  
+  if (rb.allowComments) {
+    allowComments = true; 
+  } else {
+    allowComments = false; 
+  }
+
+  PostModel({
+    title: req.body.title,
+    status: req.body.status,
+    allowComments: req.body.allowComments,
+    body: req.body.body
+  }); 
   // Output req.body 
   log(req.body); 
   // res.send('admin/posts/create'); 
