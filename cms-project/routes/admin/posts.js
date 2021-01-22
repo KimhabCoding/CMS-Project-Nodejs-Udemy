@@ -1,63 +1,77 @@
 const express = require("express");
 const router = express.Router(); // Code: 02
-const Post = require('../../models/Post'); 
-const log = console.log; 
+const Post = require("../../models/Post");
+const log = console.log;
 
-// https://expressjs.com/en/4x/api.html#app.all 
+// https://expressjs.com/en/4x/api.html#app.all
 
-router.all('/*', (req, res, next) => {
+router.all("/*", (req, res, next) => {
   // app.locals: https://expressjs.com/en/api.html#app.locals
-  // laytouts is a folder && 'admin' is a file 
+  // laytouts is a folder && 'admin' is a file
   // app.locals.layout: https://github.com/express-handlebars/express-handlebars
-  req.app.locals.layout = 'admin'; 
-  next(); 
-}); 
+  req.app.locals.layout = "admin";
+  next();
+});
 
-router.get('/', (req, res) => {
-  Post.find({}).then(posts => {
-    res.render('admin/posts', {posts: posts}); 
-  }); 
+router.get("/", (req, res) => {
+  Post.find({}).then((posts) => {
+    res.render("admin/posts", { posts: posts });
+  });
 
-  // res.render('admin/posts'); 
+  // res.render('admin/posts');
 });
 
 /* router.get('/index', (req, res) => {
   res.render('/admin/posts/index');  
 });  */
 
-// Create Post 
-router.get('/create', (req, res) => {
-  res.render('admin/posts/create', {titlehead: 'Create Post'}); 
-}); 
+// Create Post
+router.get("/create", (req, res) => {
+  res.render("admin/posts/create", { titlehead: "Create Post" });
+});
 
-// Method post to create post 
-router.post('/create', (req, res) => {
-  let allowComments = true; 
-  
-  // log(req.body.allowComments); 
+// Method post to create post
+router.post("/create", (req, res) => {
+  let allowComments = true;
 
-  if(req.body.allowComments) {
+  // log(req.body.allowComments);
+
+  if (req.body.allowComments) {
     allowComments = true;
   } else {
-    allowComments = false; 
+    allowComments = false;
   }
 
   const newPost = new Post({
     title: req.body.title,
     status: req.body.status,
     allowComments: allowComments,
-    body: req.body.body
-  }); 
+    body: req.body.body,
+  });
 
-  newPost.save().then(savedPost => {
-    res.redirect('/admin/posts'); 
-  }).catch(error => {
-    log('Could not save data'); 
-  }); 
-  // Output req.body 
-  // log(req.body); 
-  // res.send('admin/posts/create'); 
+  newPost
+    .save()
+    .then((savedPost) => {
+      res.redirect("/admin/posts");
+    })
+    .catch((error) => {
+      log("Could not save data");
+    });
+  // Output req.body
+  // log(req.body);
 });
 
+// Edit or Update Post 
+router.get('/edit/:id', (req, res) => {
+
+  // Get old data in edit form 
+  Post.findOne({ _id: req.params.id }).then(post => {
+    res.render('admin/posts/edit', { post: post });
+  });
+
+  // res.send(req.params.id); 
+  // res.render('admin/posts/edit'); 
+
+}); 
 
 module.exports = router; // router get from 02

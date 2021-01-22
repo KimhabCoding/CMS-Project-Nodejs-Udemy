@@ -6,6 +6,9 @@
             <th scope="col">Title</th>
             <th scope="col">Status</th>
             <th scope="col">Allow Comments</th>
+            <th scope="col">Body</th>
+            <th scope="col">Action</th>
+
         </tr>
     </thead>
     <tbody>
@@ -16,6 +19,8 @@
             <td>{{title}}</td>
             <td>{{status}}</td>
             <td>{{allowComments}}</td>
+            <td>{{body}}</td>
+            <td><a href="/admin/posts/edit/{{id}}" class="btn btn-info">Edit</td>
         </tr>
         {{/each}}
     </tbody>
