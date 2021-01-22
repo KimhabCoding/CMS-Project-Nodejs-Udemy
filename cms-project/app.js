@@ -5,7 +5,10 @@ const exphbs  = require('express-handlebars');
 const log = console.log;
 const mongoose = require('mongoose'); 
 const bodyParser = require('body-parser'); // https://www.npmjs.com/package/body-parser
-
+const Handlebars = require('handlebars'); 
+// fix allowInsecurePrototypeAccess is not a function by add allowInsecurePrototypeAccess ---> { allowInsecurePrototypeAccess } 
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access'); 
+      
 mongoose.Promise = global.Promise; 
 // More about Using Promise: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
 
@@ -28,7 +31,13 @@ mongoose.connection
 // Express-handlebars https://github.com/express-handlebars/express-handlebars
 // defaultLayout: https://github.com/express-handlebars/express-handlebars#defaultlayout
 // 'home' is folder 
-app.engine('handlebars', exphbs({defaultLayout: 'home'}));
+app.engine('handlebars',
+  exphbs({
+    defaultLayout: 'home', 
+    // Issue in Access has been denied to resolve the property
+    //"---" because it is not an "own property" of its parent.
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+  }));
 app.set('view engine', 'handlebars');
 
 // Path: https://expressjs.com/en/api.html#app.use
