@@ -14,7 +14,11 @@ router.all('/*', (req, res, next) => {
 }); 
 
 router.get('/', (req, res) => {
-  res.send('It works.'); 
+  Post.find({}).then(posts => {
+    res.render('admin/posts', {posts: posts}); 
+  }); 
+
+  // res.render('admin/posts'); 
 });
 
 /* router.get('/index', (req, res) => {
@@ -23,7 +27,7 @@ router.get('/', (req, res) => {
 
 // Create Post 
 router.get('/create', (req, res) => {
-  res.render('admin/posts/create', {title: 'Create Post'}); 
+  res.render('admin/posts/create', {titlehead: 'Create Post'}); 
 }); 
 
 // Method post to create post 
