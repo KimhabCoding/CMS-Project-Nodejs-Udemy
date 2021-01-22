@@ -1,12 +1,12 @@
 <h1>Create Post</h1>
-<form action='/admin/posts/create' method='post' enctype='multipart/form-data'>
-    <div class='form-group'>
-        <label for='exampleInputTitle1'>Title</label>
-        <input type='text' class='form-control' id='exampleInputTitle1' aria-describedby='etitleelp'>
-        {{!-- <small id='titleHelp' class='form-text text-muted'>We'll never share your email with anyone else.</small>
+<form action="/admin/posts/create" method="POST">
+    <div class="form-group">
+        <label for="exampleInputTitle1">Title</label>
+        <input name="title" type="text" class="form-control" id="exampleInputTitle1" aria-describedby="etitleelp">
+        {{!-- <small id="titleHelp" class="form-text text-muted">We"ll never share your email with anyone else.</small>
         --}}
     </div>
-    <div class='form-group'>
+    <div class="form-group">
         <label for="status">Status</label>
         <select name="status" id="status" class="form-control">
             <option value="public">Public</option>
@@ -23,5 +23,5 @@
         <label for="body">Body</label>
         <textarea name="body" class="form-control" id="body" rows="3" placeholder="Input descrption"></textarea>
     </div>
-    <button type='submit' class='btn btn-primary'>Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>

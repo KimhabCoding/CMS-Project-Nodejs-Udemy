@@ -12,7 +12,7 @@ mongoose.Promise = global.Promise;
 // Connection URL
 const url = 'mongodb://localhost:27017/cms';
 
-// BodyParser 
+// BodyParser   
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 

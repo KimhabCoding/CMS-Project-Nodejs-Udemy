@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router(); // Code: 02
+const log = console.log; 
 
 // https://expressjs.com/en/4x/api.html#app.all 
 
@@ -26,7 +27,9 @@ router.get('/create', (req, res) => {
 
 // Method post to create post 
 router.post('/create', (req, res) => {
-  res.render('admin/posts/create'); 
+  // Output req.body 
+  log(req.body); 
+  // res.send('admin/posts/create'); 
 });
 
 
