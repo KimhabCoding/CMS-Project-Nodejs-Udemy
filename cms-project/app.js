@@ -8,6 +8,9 @@ const bodyParser = require('body-parser'); // https://www.npmjs.com/package/body
 const Handlebars = require('handlebars'); 
 // fix allowInsecurePrototypeAccess is not a function by add allowInsecurePrototypeAccess ---> { allowInsecurePrototypeAccess } 
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access'); 
+
+// https://www.npmjs.com/package/method-override
+const methodOverride = require('method-override')
       
 mongoose.Promise = global.Promise; 
 // More about Using Promise: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
@@ -28,12 +31,16 @@ mongoose.connection
         log(`Could not connect`, err); 
     });  
 
+// select is a function in file (handlebars-helpers)
+const { select } = require('./helpers/handlebars-helpers');     
+
 // Express-handlebars https://github.com/express-handlebars/express-handlebars
 // defaultLayout: https://github.com/express-handlebars/express-handlebars#defaultlayout
 // 'home' is folder 
 app.engine('handlebars',
   exphbs({
     defaultLayout: 'home', 
+    helpers: {select: select}, 
     // Issue in Access has been denied to resolve the property
     //"---" because it is not an "own property" of its parent.
     handlebars: allowInsecurePrototypeAccess(Handlebars),
@@ -44,6 +51,8 @@ app.set('view engine', 'handlebars');
 // GET /style.css etc
 app.use(express.static(path.join(__dirname, "public")));
 
+// Method Override 
+app.use(methodOverride('_method')); 
 
 // https://expressjs.com/en/guide/routing.html
 const home = require('./routes/home/home'); 

@@ -74,4 +74,9 @@ router.get('/edit/:id', (req, res) => {
 
 }); 
 
+// Method Update Post | Put Method to update post 
+router.put('/edit/:id', (req, res) => {
+  res.send('It works'); 
+}); 
+
 module.exports = router; // router get from 02
