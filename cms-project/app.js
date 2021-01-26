@@ -10,7 +10,10 @@ const Handlebars = require('handlebars');
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access'); 
 
 // https://www.npmjs.com/package/method-override
-const methodOverride = require('method-override')
+const methodOverride = require('method-override'); 
+
+// https://www.npmjs.com/package/express-fileupload
+const upload = require('express-fileupload'); 
       
 mongoose.Promise = global.Promise; 
 // More about Using Promise: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises
@@ -46,6 +49,11 @@ app.engine('handlebars',
     handlebars: allowInsecurePrototypeAccess(Handlebars),
   }));
 app.set('view engine', 'handlebars');
+
+// Upload Middlware 
+app.use(upload({
+  limits: { fileSize: 50 * 1024 * 1024 },
+}));
 
 // Path: https://expressjs.com/en/api.html#app.use
 // GET /style.css etc
