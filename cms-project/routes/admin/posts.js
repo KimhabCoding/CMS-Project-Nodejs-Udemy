@@ -76,7 +76,30 @@ router.get('/edit/:id', (req, res) => {
 
 // Method Update Post | Put Method to update post 
 router.put('/edit/:id', (req, res) => {
-  res.send('It works'); 
+
+  // Get old data in edit form 
+  Post.findOne({ _id: req.params.id })
+    .then(post => {
+      if (req.body.allowComments) {
+        allowComments = true;
+      }
+      else {
+        allowComments = false;
+      }
+      
+      post.title = req.body.title;
+      post.status = req.body.status;
+      post.allowComments = allowComments;
+      post.body = req.body.body;
+      
+      // Save data after edit data 
+      post.save().then(updatedPost => {
+        res.redirect('/admin/posts'); 
+      }); 
+      
+      // res.render('admin/posts/edit', { post: post }); 
+    });
+  // res.send('It works'); 
 }); 
 
 module.exports = router; // router get from 02
