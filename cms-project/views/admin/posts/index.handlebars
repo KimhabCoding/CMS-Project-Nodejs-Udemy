@@ -4,6 +4,7 @@
         <thead>
             <tr>
                 <th scope="col">Id</th>
+                <th scope="col">File</th>
                 <th scope="col">Title</th>
                 <th scope="col">Status</th>
                 <th scope="col">Allow Comments</th>
@@ -17,6 +18,8 @@
             {{#each posts}}
             <tr>
                 <th scope="row">{{id}}</th>
+                <th scope="row"><img height="100" class="img-responsive mx-auto d-block" src="/uploads/{{file}}">
+                </th>
                 <td>{{title}}</td>
                 <td>{{status}}</td>
                 <td>{{allowComments}}</td>

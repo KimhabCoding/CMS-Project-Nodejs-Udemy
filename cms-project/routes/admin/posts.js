@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router(); // Code: 02
 const Post = require("../../models/Post");
+const { isEmpty } = require("../../helpers/upload_helper");
 const log = console.log;
 
 // https://expressjs.com/en/4x/api.html#app.all
@@ -35,11 +36,19 @@ router.post("/create", (req, res) => {
 
   // log(req.files); 
   let file = req.files.file; 
-  let filename = file.name; 
+  let filename = Date.now() + '-' + file.name; 
+  
+  if (!isEmpty(req.files)) {
+    /* let file = req.files.file; 
+    let filename = Date.now() + '-' + file.name;  */
 
-  file.mv('./public/uploads/' + filename, (err) => {
-    if (err) throw err;
-  }); 
+    file.mv('./public/uploads/' + filename, (err) => {
+      if (err) throw err;
+    }); 
+  }
+  else {
+    log('It is empty.'); 
+  }
 
   let allowComments = true;
 
@@ -56,6 +65,7 @@ router.post("/create", (req, res) => {
     status: req.body.status,
     allowComments: allowComments,
     body: req.body.body,
+    file: filename
   });
 
   newPost
