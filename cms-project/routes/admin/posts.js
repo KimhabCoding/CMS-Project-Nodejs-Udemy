@@ -32,6 +32,15 @@ router.get("/create", (req, res) => {
 
 // Method post to create post
 router.post("/create", (req, res) => {
+
+  // log(req.files); 
+  let file = req.files.file; 
+  let filename = file.name; 
+
+  file.mv('./public/uploads/' + filename, (err) => {
+    if (err) throw err;
+  }); 
+
   let allowComments = true;
 
   // log(req.body.allowComments);
